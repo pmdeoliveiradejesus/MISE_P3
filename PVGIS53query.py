@@ -4,7 +4,7 @@
 Análisis de Irradiancia GHI - Riohacha, La Guajira
 Vectores: Promedio, Máximo y Mínimo Real
 """
-
+!pip install pvlib
 import pvlib
 import pandas as pd
 import numpy as np
