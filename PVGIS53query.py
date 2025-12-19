@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 
 # 1. Configuración
-lat, lon = 11.546, -72.896 #Rio Hacha, Colombia
+lat, lon = 11.546, -72.896 #Rio Hacha, La Guajira. Colombia
 # lat, lon =36.157, -115.170 #Las Vegas, USA
 try:
     # 2. Obtención de TMY (especificando periodo para mayor precisión)
