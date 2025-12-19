@@ -3,7 +3,7 @@
 """
 Created on Fri Dec 19 14:48:45 2025
 @author: pm.deoliveiradejes - Gemini 3
-
+"""
 !pip install pvlib 
 import pvlib
 import pandas as pd
