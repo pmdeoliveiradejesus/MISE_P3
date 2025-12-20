@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Análisis de Irradiancia GHI - Riohacha, La Guajira
+Created on Sat Dec 20 14:50:58 2025
+
+@author: pm.deoliveiradejes, GEMINI 3
+ 
+Análisis de Irradiancia GHI  
 Vectores: Promedio, Máximo y Mínimo Real
 """
-!pip install pvlib
+!pip install pvlib 
 import pvlib
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 # 1. Configuración de Coordenadas
-lat, lon = 11.546, -72.896 # Riohacha, Colombia
-
+lat, lon = 11.546, -72.896 # Riohacha, La Guajira, Colombia
+#lat, lon =36.157, -115.170 #Las Vegas, USA
 try:
     print(f"Consultando PVGIS 5.3 para: Lat {lat}, Lon {lon}...")
     
@@ -54,10 +58,10 @@ try:
 
     # --- 5. RESULTADOS EN CONSOLA ---
     df_comparativo = pd.DataFrame({
-        'Hora': horas,
+         'Hora': horas,
         'Promedio': ghi_promedio.values,
-        'Máximo': ghi_max_dia,
-        'Mínimo': ghi_min_dia
+    #    'Máximo': ghi_max_dia,
+    #    'Mínimo': ghi_min_dia
     }).set_index('Hora')
 
     print("\n" + "="*50)
@@ -66,7 +70,7 @@ try:
     print(df_comparativo.round(2).to_string())
     
     print("\n" + "="*50)
-    print("SUMAS DE ENERGÍA DIARIA (HSP - kWh/m²/día)")
+    print("SUMAS DE ENERGÍA DIARIA (HPS - kWh/m²/día)")
     print(f"Promedio Anual : {ghi_promedio.sum()/1000:.3f}")
     print(f"Día Máximo ({f_max.strftime('%d-%b')}) : {ghi_max_dia.sum()/1000:.3f}")
     print(f"Día Mínimo ({f_min.strftime('%d-%b')}) : {ghi_min_dia.sum()/1000:.3f}")
@@ -75,35 +79,35 @@ try:
     # --- 6. GENERACIÓN DE GRÁFICAS ---
     fig, axs = plt.subplots(2, 2, figsize=(15, 10))
 
-    # FIGURA 1: Las 3 Campanas (La que necesitabas corregir)
+    # FIGURA 1: Las 3 Campanas  
     axs[0, 0].plot(horas, ghi_promedio.values, 'k--', lw=2.5, label='Promedio Anual')
     axs[0, 0].plot(horas, ghi_max_dia, 'r-', lw=2, label=f'Día Máximo ({f_max.strftime("%d-%b")})')
     axs[0, 0].plot(horas, ghi_min_dia, 'g-', lw=2, label=f'Día Mínimo ({f_min.strftime("%d-%b")})')
     
     axs[0, 0].set_title('Campanas GHI 24h: Máx, Mín y Promedio')
-    axs[0, 0].set_xlabel('Hora Local (Colombia)')
+    axs[0, 0].set_xlabel('Hora Local')
     axs[0, 0].set_ylabel('Irradiancia [W/m²]')
     axs[0, 0].set_xticks(range(0, 25, 2))
     axs[0, 0].legend()
     axs[0, 0].grid(True, alpha=0.3)
 
     # FIGURA 2: Irradiancia Media Diaria (365 días)
-    axs[0, 1].plot(ghi_limpio.resample('D').mean().values, color='orange', lw=1)
+    axs[0, 1].plot(24*ghi_limpio.resample('D').mean().values, color='orange', lw=1)
     axs[0, 1].set_title('Irradiancia Media Diaria (TMY)')
     axs[0, 1].set_xlabel('Día del Año')
-    axs[0, 1].set_ylabel('GHI Medio [W/m²]')
+    axs[0, 1].set_ylabel('GHI Medio [W/m²-dia]')
     axs[0, 1].grid(True, alpha=0.3)
 
     # FIGURA 3: Promedio Mensual
-    prom_mensual = ghi_limpio.groupby(ghi_limpio.index.month).mean()
+    prom_mensual = 24*ghi_limpio.groupby(ghi_limpio.index.month).mean()
     meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
     axs[1, 0].bar(meses, prom_mensual.values, color='skyblue', edgecolor='navy')
     axs[1, 0].set_title('Distribución Mensual de GHI')
-    axs[1, 0].set_ylabel('GHI Medio [W/m²]')
+    axs[1, 0].set_ylabel('GHI Medio [W/m²-dia]')
 
     # FIGURA 4: Serie completa 8760h
     axs[1, 1].plot(ghi_series.values, color='gray', lw=0.2)
-    axs[1, 1].set_title('Serie Temporal 8760h (Contexto)')
+    axs[1, 1].set_title('Serie Temporal 8760h')
     axs[1, 1].set_xlabel('Horas del Año')
     axs[1, 1].grid(True, alpha=0.2)
 
