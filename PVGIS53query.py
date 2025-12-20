@@ -60,8 +60,8 @@ try:
     df_comparativo = pd.DataFrame({
          'Hora': horas,
         'Promedio': ghi_promedio.values,
-    #    'Máximo': ghi_max_dia,
-    #    'Mínimo': ghi_min_dia
+        'Máximo': ghi_max_dia,
+        'Mínimo': ghi_min_dia
     }).set_index('Hora')
 
     print("\n" + "="*50)
