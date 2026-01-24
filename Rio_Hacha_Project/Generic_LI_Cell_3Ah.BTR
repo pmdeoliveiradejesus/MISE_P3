@@ -1,0 +1,91 @@
+﻿PVObject_=pvBattery
+  Comment=Generic	Cell  26650  3Ah 3.2V	PVsyst SA
+  Version=8.0.19
+  ParObj1=2017
+  Flags=$80000000
+
+  PVObject_Commercial=pvCommercial
+    Flags=$0041
+    Manufacturer=Generic
+    Model=Cell  26650  3Ah 3.2V
+    DataSource=PVsyst SA
+    YearBeg=2017
+    Height=0.065
+    Diameter=0.026
+    Weight=0.082
+    NPieces=100
+    PriceDate=20/12/25 18:35
+    Remarks, Count=3
+      Str_1
+      Str_2
+      Str_3
+    End of Remarks
+  End of PVObject pvCommercial
+  BattModeAff=ByElement
+  BattTechnol=Li_LFP
+  Category=CylCell
+  CylCellRef=26650
+  NCellSerie=1
+  NCellParall=1
+  NBlockSerie=1
+  NBlockParall=1
+  CapNomC10=3.10
+  DataSheetCap=3.00
+  DataShDishHours=5.00
+  PeukertCoeff=1.020
+  VNomCell=3.2
+  VHalfSOC_TRef=3.280
+  AlphaSOC=0.1500
+  BattTempRef=20.0
+  ResInterne=0.0500
+  EfficI=0.960
+  SOCLD=0.200
+  DVDech=0.300
+  SOCLG=0.900
+  ResCorrAmpl=15.000
+  VMax_Charge=4.2
+  VMinDischarge=2.0
+  IMaxCharge=3.000
+  IMaxDischarge=6.100
+  TempMinCharge=0.0
+  TempMinDisch=-20.0
+  ActivE_ResInt=20.0
+  IAutoDech=0.00025
+  DureeVie20=10.00
+
+  CapaTemper=TCubicProfile
+    NPtsMax=5
+    NPtsEff=5
+    LastCompile=$0081
+    Mode=3
+    Point_1=-20.00,0.70
+    Point_2=-10.00,0.82
+    Point_3=0.00,0.88
+    Point_4=23.00,0.97
+    Point_5=45.00,1.01
+  End of TCubicProfile
+
+  IAutoShape=TCubicProfile
+    NPtsMax=5
+    NPtsEff=5
+    LastCompile=$0085
+    Mode=3
+    Point_1=-5.00,0.80
+    Point_2=15.00,0.84
+    Point_3=25.00,1.00
+    Point_4=35.00,2.00
+    Point_5=45.00,10.00
+  End of TCubicProfile
+
+  NbCycleMax=TCubicProfile
+    NPtsMax=5
+    NPtsEff=5
+    LastCompile=$0085
+    Mode=3
+    Point_1=0.20,30000.00
+    Point_2=0.40,15000.00
+    Point_3=0.60,10000.00
+    Point_4=0.80,7500.00
+    Point_5=1.00,6000.00
+  End of TCubicProfile
+End of PVObject pvBattery
